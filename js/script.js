@@ -3,7 +3,7 @@ function titleClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
   console.log('clickedElement (with plus):' + clickedElement);
-}
+
 /* [DONE] remove class 'active' from all articles links*/
 
 const activeLinks = document.querySelectorAll('.titles a.active');
@@ -30,6 +30,7 @@ console.log(articleSelector);
 const targetArticle = document.querySelector('article-1')
 /*add class 'active' to the correct article*/
 targetArticle.classList.add('active');
+}
 
 const links = document.querySelectorAll('.titles a');
 
