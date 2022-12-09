@@ -61,15 +61,22 @@ function generateTitleLinks(){
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     console.log('linkHTML');
     /* insert link into titleList */
-
-                  /* dlaczego nie to??? titleList.innerHTML = titleList.innerHTML + linkHTML;
-                  titleList.insertAdjacentHTML('beforebegin', linkHTML);*/
-  html = html + linkHTML;
+    titleList.innerHTML = titleList.innerHTML + linkHTML;
+    titleList.insertAdjacentHTML('beforebegin', linkHTML);
+    /* insert link into html variable */
+    html = html + linkHTML;
+    console.log(html);
+}
   titleList.innerHTML = html;
-  }
+}
+
+generateTitleLinks();
 
 const links = document.querySelectorAll('.titles a');
 console.log(links);
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
+
+
+
