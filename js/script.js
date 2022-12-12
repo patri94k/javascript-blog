@@ -36,10 +36,10 @@ function titleClickHandler(event){
 
 //5.4 Generowanie listy tytułów
 //zapisanie ustawień skryptu w stałych - łatwość zmiany naz klas w HTML
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+const optArticleSelector = '.post', //article
+  optTitleSelector = '.post-title', //article>h3
+  optTitleListSelector = '.titles', //ul>titles
+  optArticleTagsSelector = '.post-tags .list'; //<ul>
 
 function generateTitleLinks(){
   /*remove contents of titleList*/
@@ -78,6 +78,41 @@ for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
 
+//6.2 - Generate tags
 
+function generateTags(){
+  /* find all articles */
+const allArticles =  document.querySelectorAll(article);
+console.log(allArticles);
+  /* START LOOP: for every article: */
+    for(let article of articles){
+    /* find tags wrapper */
+    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    console.log(tagsWrapper);
+    /* make html variable with empty string */
+    let html = ''; //pusty kontenerek
+    /* get tags from data-tags attribute */
+      const articleTags = article.getAttribute('data-tags');
+      console.log(articleTags);
+    /* split tags into array */
+      const articleTagsArray = articleTags.split(' ');
+      console.log(articleTagsArray);
+    /* START LOOP: for each tag */
+      for(let tag of articleTagsArray){
+      /* generate HTML of the link */
+       const tagLinkHTML = <li><a href="#tag-' + articleTagsArray + '">' + articleTagsArray + '</a></li>;
+      /* add generated code to html variable */
+        html = html + tagLinkHTML;
+    /* END LOOP: for each tag */
+    }
+    console.log(tag);
+
+    /* insert HTML of all the links into the tags wrapper */
+      tagsWrapper.innerHTML = html;
+  /* END LOOP: for every article: */
+    }
+}
+
+generateTags();
 
 
