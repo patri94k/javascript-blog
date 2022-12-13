@@ -50,7 +50,6 @@ function generateTitleLinks(customSelector = ''){
   /* for each article */
   const articles = document.querySelectorAll(optArticleTagsSelector + customSelector); // if tag "cat" is clicked, article will retrieve '[data-tags~="cat"]'
   console.log(articles);
-  console.log(customSelector);
   for(let article of articles){
   /* get the article id */
     const articleId = article.getAttribute('id');
@@ -151,13 +150,13 @@ generateTitleLinks('[data-tags~="' + tag + '"]');
 
 function addClickListenersToTags(){
   /* find all links to tags */
-
+  const allTagsLinks = document.querySelectorAll('a[href^="#tag-"]');
   /* START LOOP: for each link */
-
+  for(let allTagsLink of allTagsLinks){
   /* add tagClickHandler as event listener for that link */
-
+    allTagsLink.addEventListener('click', tagClickHandler);
   /* END LOOP: for each link */
+  }
 }
 
 addClickListenersToTags();
-
