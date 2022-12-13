@@ -41,15 +41,16 @@ const optArticleSelector = '.post', //article
   optTitleListSelector = '.titles', //ul>titles
   optArticleTagsSelector = '.post-tags .list'; //<ul>
 
-function generateTitleLinks(){
+function generateTitleLinks(customSelector = ''){
   /*remove contents of titleList*/
   const titleList = document.querySelector(optTitleListSelector);
   //czyszczenie zawartości elementu
   titleList.innerHTML = '';
   let html = '';
   /* for each article */
-  const articles = document.querySelectorAll(optArticleTagsSelector);
-
+  const articles = document.querySelectorAll(optArticleTagsSelector + customSelector); // if tag "cat" is clicked, article will retrieve '[data-tags~="cat"]'
+  console.log(articles);
+  console.log(customSelector);
   for(let article of articles){
   /* get the article id */
     const articleId = article.getAttribute('id');
@@ -129,7 +130,7 @@ function tagClickHandler(event){
   /* make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
   /* find all tag links with class active */
-  const tagLinks = document.querySelectorAll('a.active[href^"#tag-"]');
+  const tagLinks = document.querySelectorAll('a.active[href^"#tag-"]');//active tags
   /* START LOOP: for each active tag link */
   for(let tagLink of tagLinks){
   /* remove class active */
@@ -137,7 +138,7 @@ function tagClickHandler(event){
   /* END LOOP: for each active tag link */
   }
   /* find all tag links with "href" attribute equal to the "href" constant */
-  const linkHref = tagLinks.querySelector('a[href="' + href + '"]');
+  const linkHref = document.querySelector('a[href="' + href + '"]');// can we use tagLink zamiast document?
   /* START LOOP: for each found tag link */
   for(let tagLink of tagLinks ){
   /* add class active */
@@ -146,7 +147,8 @@ function tagClickHandler(event){
   }  
   /* execute function "generateTitleLinks" with article selector as argument */
 }
-generateTitleLinks(article);
+generateTitleLinks('[data-tags~="' + tag + '"]');
+
 function addClickListenersToTags(){
   /* find all links to tags */
 
