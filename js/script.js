@@ -40,6 +40,7 @@ const optArticleSelector = '.post', //article
   optTitleSelector = '.post-title', //article>h3
   optTitleListSelector = '.titles', //ul>titles
   optArticleTagsSelector = '.post-tags .list'; //<ul>
+  optArticleAuthorSelector = '.post .post-author';//author's name in article
 
 function generateTitleLinks(customSelector = ''){
   /*remove contents of titleList*/
@@ -66,7 +67,7 @@ function generateTitleLinks(customSelector = ''){
     /* insert link into html variable */
     html = html + linkHTML;
     console.log(html);
-}
+  }
   titleList.innerHTML = html;
 }
 generateTitleLinks();
@@ -82,10 +83,10 @@ for(let link of links){
 
 function generateTags(){
   /* find all articles */
-  const allArticles =  document.querySelectorAll(article);
+  const allArticles =  document.querySelectorAll(optArticleSelector);
   console.log(allArticles);
   /* START LOOP: for every article: */
-  for(let article of articles){
+  for(let article of allArticles){
     /* find tags wrapper */
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     console.log(tagsWrapper);
@@ -160,3 +161,29 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+/*Zadanie:dodanie autora do artykułu*/
+function generateAuthors(){
+/* find all articles */
+  const allArticles =  document.querySelectorAll(optArticleSelector);
+  console.log(allArticles);
+  /* START LOOP: for every article: */
+  /*Dlaczego używamy autora który nie został nigdzie wcześniej zdefiniowany?*/
+  for(let article of allArticles){
+  /* find authors wrapper */
+    const authorWrapper = document.querySelector(optArticleAuthorSelector);
+    console.log(authorWrapper);
+    /* make html variable with empty string */
+    let html = ''; //pusty kontenerek
+    /* get authors from element */
+    const articleAuthor = article.getAttribute('data-author');
+    console.log(articleAuthor);
+    /* generate HTML of the link */
+    const authorHTML = '<li><a href="#author-' + articleAuthor + '">' + articleAuthor + '</a></li>';
+    /* add generated code to html variable */
+    html = html + authorHTML;
+  }
+  /* insert HTML of all the links into the post-author*/
+  authorWrapper.innerHTML = html;
+/* END LOOP: for every article: */
+}
