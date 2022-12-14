@@ -187,3 +187,27 @@ function generateAuthors(){
   authorWrapper.innerHTML = html;
 /* END LOOP: for every article: */
 }
+
+function authorClickHandler(event){
+  event.preventDefault();
+  const clickedElement = this;
+  console.log(clickedElement);
+
+  const href = clickedElement.getAttribute('href');
+
+  const author = href.replace('#','');
+  
+  const activeAuthors = document.querySelectorAll('a.active[href^="#author"]');
+  for(let activeAuthor of activeAuthors){
+    activeAuthor.classList.add('active');
+  }
+}
+generateAuthors('[data-author=" ' + author + '"]');
+
+function addClickListenerToAuthors(){
+  const allAuthorLinks = document.querySelector('a[href^="#author-"]');
+  for(let allAuthorLink of allAuthorsLinks){
+    allAuthorLink.addEventListener('click', authorClickHandler);
+  }
+}
+addClickListenerToAuthors();
